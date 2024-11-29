@@ -1,3 +1,4 @@
+#Basic class to manage and interact withg To Do Lists, every task its also a to do list, because they can be completed and have your own sub tasks to
 class Todolist():
     def __init__(self, name):
         self.name = name
