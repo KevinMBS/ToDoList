@@ -8,17 +8,21 @@ def main(page: ft.Page):
     page.title="To do App"
     page.theme_mode=ft.ThemeMode.DARK
     tasks = []
+    
+    def change_status_task(e):
+        pass
 
     def add_new_task(e):
         new_tdl = tdl.Todolist(new_task_field.value)
         #salvar new_tdl no DB
-        tasks.append(ft.Checkbox(label=new_task_field.value))
+        tasks.append(ft.Checkbox(label=new_task_field.value,on_change=change_status_task))
         tasks_view.controls = tasks
         new_task_field.value=""
+        new_task_field.focus()
         page.update()
 
     #Creating elements
-    new_task_field=ft.TextField(hint_text="What's needs to be done?",border_color=BASE_WIDGETS,expand=True)
+    new_task_field=ft.TextField(hint_text="What's needs to be done?",border_color=BASE_WIDGETS,expand=True,on_submit=add_new_task)
     btn_add_task=ft.FloatingActionButton(icon=ft.Icons.ADD, on_click=add_new_task,bgcolor=BTN)
     tasks_view = ft.Column(scroll=True)
     insertion_fields=ft.Row(controls=[new_task_field,btn_add_task])
@@ -41,5 +45,5 @@ def main(page: ft.Page):
     page.add(main_container)
     page.update
 
-if __name__ == '__main__':
+if __name__=='__main__':
     ft.app(target=main)
